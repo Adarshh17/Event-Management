@@ -1,0 +1,3 @@
+@echo off
+echo Starting Event Management System API...
+python manage.py runserver

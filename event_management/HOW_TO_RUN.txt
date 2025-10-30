@@ -1,0 +1,120 @@
+================================================================================
+                    EVENT MANAGEMENT SYSTEM API
+                         HOW TO RUN
+================================================================================
+
+QUICK START (3 STEPS):
+================================================================================
+
+Step 1: Install Dependencies
+-----------------------------
+Open terminal/PowerShell in this folder and run:
+
+    pip install -r requirements.txt
+
+
+Step 2: Setup Database
+-----------------------
+    python manage.py makemigrations
+    python manage.py migrate
+
+
+Step 3: Start Server
+---------------------
+    python manage.py runserver
+
+Server will start at: http://127.0.0.1:8000/
+
+
+================================================================================
+EVEN EASIER - USE BATCH FILES (Windows):
+================================================================================
+
+First Time Setup:
+    Double-click: setup.bat
+
+Start Server:
+    Double-click: start.bat
+
+
+================================================================================
+ACCESS THE API:
+================================================================================
+
+Home Page:          http://127.0.0.1:8000/
+API Root:           http://127.0.0.1:8000/api/
+Events List:        http://127.0.0.1:8000/api/events/
+Admin Panel:        http://127.0.0.1:8000/admin/
+
+
+================================================================================
+QUICK TEST:
+================================================================================
+
+1. Open browser
+2. Go to: http://127.0.0.1:8000/api/
+3. You'll see all available endpoints!
+
+
+================================================================================
+CREATE ADMIN USER (Optional):
+================================================================================
+
+    python manage.py createsuperuser
+
+Then visit: http://127.0.0.1:8000/admin/
+
+
+================================================================================
+RUN TESTS:
+================================================================================
+
+    python manage.py test events
+
+
+================================================================================
+MAIN ENDPOINTS:
+================================================================================
+
+POST /api/auth/register/     - Register new user
+POST /api/auth/login/        - Login (get JWT token)
+GET  /api/events/            - List all events
+POST /api/events/            - Create event (requires login)
+POST /api/rsvps/             - RSVP to event (requires login)
+POST /api/reviews/           - Leave review (requires login)
+
+
+================================================================================
+EXAMPLE - REGISTER USER (PowerShell):
+================================================================================
+
+$body = @{
+    username = "john"
+    email = "john@test.com"
+    password = "Test@123"
+    password2 = "Test@123"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/auth/register/" `
+    -Method POST -ContentType "application/json" -Body $body
+
+
+================================================================================
+TROUBLESHOOTING:
+================================================================================
+
+Error: "No such table"
+    Run: python manage.py migrate
+
+Error: "Port already in use"
+    Run: python manage.py runserver 8080
+
+Error: "Module not found"
+    Run: pip install -r requirements.txt
+
+
+================================================================================
+For detailed instructions, see: HOW_TO_RUN.md
+For full documentation, see: README.md
+For verification report, see: ASSIGNMENT_VERIFICATION.md
+================================================================================
